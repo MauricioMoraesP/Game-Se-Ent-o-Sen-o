@@ -313,16 +313,11 @@
                 <span class="action">mover_esquerda()</span> &rarr; move o jogador para a esquerda<br>
                 <span class="action">mover_direita()</span> &rarr; move o jogador para a direita<br>
                 <span class="action">pular()</span> &rarr; faz o jogador pular<br>
-                <span class="action">remover(objeto)</span> &rarr; remove um objeto do jogo<br>
-                <span class="action">reposicionar(objeto)</span> &rarr; volta o objeto ao inicio<br>
-                <span class="action">exibir(texto)</span> &rarr; mostra uma mensagem na tela<br>
-                <span class="action">fase_completa()</span> &rarr; encerra a fase com vitoria<br>
-                <span class="action">fim_de_jogo()</span> &rarr; encerra o jogo (game over)<br><br>
+                <span class="action">fase_completa()</span> &rarr; encerra a fase com vitoria<br><br>
                 <span class="comment">// Comandos logicos:</span><br>
                 <span class="keyword">SE</span> &rarr; verifica uma condicao<br>
                 <span class="keyword">ENTAO</span> &rarr; executa se a condicao for verdadeira<br>
-                <span class="keyword">SENAO</span> &rarr; executa se a condicao for falsa<br>
-                <span class="keyword">E</span> &rarr; combina duas condicoes
+                <span class="keyword">SENAO</span> &rarr; executa se a condicao for falsa
             </div>
         </details>
 
@@ -365,15 +360,15 @@
             <div class="code-context">
                 <span class="comment">// Quando o jogador toca na moeda:</span><br>
                 <span class="keyword">SE</span> jogador <span class="action">toca_na</span>(moeda) <span class="keyword">ENTAO</span><br>
-                &nbsp;&nbsp;<span class="placeholder" id="blank1">???</span>
+                &nbsp;&nbsp;<span class="placeholder" id="blank1">???</span><br>
+                &nbsp;&nbsp;<span class="action">remover</span>(moeda)
             </div>
             <div class="code-input-row">
                 <select id="select1">
                     <option value="">-- Escolha a acao correta --</option>
                     <option value="wrong1">moeda = moeda + 1</option>
-                    <option value="correct">pontos = pontos + 10 E remover(moeda)</option>
-                    <option value="wrong2">jogador.pular()</option>
-                    <option value="wrong3">vida = vida - 1</option>
+                    <option value="correct">pontos = pontos + 10</option>
+                    <option value="wrong2">vidas = vidas - 1</option>
                 </select>
                 <button class="btn-apply" id="btn1" onclick="checkAnswer(1)">Aplicar</button>
             </div>
@@ -391,6 +386,7 @@
                 <span class="comment">// Quando o jogador toca no inimigo:</span><br>
                 <span class="keyword">SE</span> jogador <span class="action">toca_no</span>(inimigo) <span class="keyword">ENTAO</span><br>
                 &nbsp;&nbsp;<span class="placeholder" id="blank2">???</span><br>
+                &nbsp;&nbsp;<span class="action">reposicionar</span>(jogador)<br>
                 <span class="keyword">SE</span> vidas == 0 <span class="keyword">ENTAO</span><br>
                 &nbsp;&nbsp;<span class="action">fim_de_jogo()</span>
             </div>
@@ -398,9 +394,8 @@
                 <select id="select2">
                     <option value="">-- Escolha a acao correta --</option>
                     <option value="wrong1">pontos = pontos + 10</option>
-                    <option value="wrong2">remover(inimigo)</option>
-                    <option value="correct">vidas = vidas - 1 E reposicionar(jogador)</option>
-                    <option value="wrong3">jogador.velocidade = 0</option>
+                    <option value="correct">vidas = vidas - 1</option>
+                    <option value="wrong2">pontos = pontos - 10</option>
                 </select>
                 <button class="btn-apply" id="btn2" onclick="checkAnswer(2)">Aplicar</button>
             </div>
@@ -424,9 +419,8 @@
             <div class="code-input-row">
                 <select id="select3">
                     <option value="">-- Escolha a acao correta --</option>
-                    <option value="wrong1">vida = vida + 1</option>
-                    <option value="wrong2">jogador.pular()</option>
-                    <option value="wrong3">remover(bandeira)</option>
+                    <option value="wrong1">vidas = vidas + 1</option>
+                    <option value="wrong2">pontos = pontos + 10</option>
                     <option value="correct">fase_completa()</option>
                 </select>
                 <button class="btn-apply" id="btn3" onclick="checkAnswer(3)">Aplicar</button>
@@ -1138,11 +1132,11 @@ function checkAnswer(num) {
             document.getElementById('blank0c').style.color = '#6bcb77';
         } else if (num === 1) {
             rules.coins = true;
-            blank.textContent = 'pontos = pontos + 10 E remover(moeda)';
+            blank.textContent = 'pontos = pontos + 10';
             blank.style.color = '#6bcb77';
         } else if (num === 2) {
             rules.enemy = true;
-            blank.textContent = 'vidas = vidas - 1 E reposicionar(jogador)';
+            blank.textContent = 'vidas = vidas - 1';
             blank.style.color = '#6bcb77';
         } else if (num === 3) {
             rules.flag = true;
